@@ -1,0 +1,27 @@
+{
+  "name": "webpack-demo",
+  "version": "1.0.0",
+  "description": "学习w过程中写到的一些Demo",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angelpray/webpack-demo.git"
+  },
+  "keywords": [
+    "webpack-demo"
+  ],
+  "author": "Vexekefo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/angelpray/webpack-demo/issues"
+  },
+  "homepage": "https://github.com/angelpray/webpack-demo#readme",
+  "devDependencies": {
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.1"
+  }
+}
