@@ -53,7 +53,18 @@ module.exports = {
           ]
         }
       }]
-    }
-    ]
+    },
+    {
+      test: /\.(png|jpg|gif|jpeg)$/,
+      use: [{
+        loader: 'file-loader',
+        options: {
+          name: '[path]avatar.jpg',
+          context: '../',
+          publicPath: 'http://www.test.com/img',
+          outputPath: './images'
+        }
+      }]
+    }]
   }
 };
