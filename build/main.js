@@ -81,19 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./public/pageTwo/index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./public/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./public/pageTwo/index.js":
-/*!*********************************!*\
-  !*** ./public/pageTwo/index.js ***!
-  \*********************************/
+/***/ "./public/index.js":
+/*!*************************!*\
+  !*** ./public/index.js ***!
+  \*************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("console.log('pageOne，多入口');\n\n\n//# sourceURL=webpack:///./public/pageTwo/index.js?");
+eval("console.log('配置webpack-dev-server');\n\n\n//# sourceURL=webpack:///./public/index.js?");
 
 /***/ })
 

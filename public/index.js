@@ -1,1 +1,1 @@
-console.log('使用webpack配置进行打包');
+console.log('配置webpack-dev-server');
