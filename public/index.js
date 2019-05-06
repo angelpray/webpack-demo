@@ -1,1 +1,3 @@
-console.log('配置webpack-dev-server');
+import './index.css';
+
+console.log('加载css');
