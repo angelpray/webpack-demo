@@ -1,4 +1,5 @@
 import './index.scss';
 import './index.less';
+import './iconfont.css';
 
-console.log('编译less和sass');
+console.log('字体处理');

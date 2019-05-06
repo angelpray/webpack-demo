@@ -15,6 +15,10 @@ module.exports = {
   },
   module: {
     rules: [{
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader']
+    },
+    {
       test: /\.less$/,
       use: ['style-loader', 'css-loader', 'less-loader', {
         loader: 'postcss-loader',
@@ -63,6 +67,15 @@ module.exports = {
           context: '../',
           publicPath: 'http://www.test.com/img',
           outputPath: './images'
+        }
+      }]
+    },
+    {
+      test: /\.(eot|svg|ttf|woff|woff2)$/,
+      use: [{
+        loader: 'file-loader',
+        options: {
+          outputPath: './fonts'
         }
       }]
     }]
