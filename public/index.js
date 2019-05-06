@@ -1,3 +1,4 @@
-import './index.css';
+import './index.less';
+import './index.scss';
 
-console.log('加载css');
+console.log('编译less和sass');
