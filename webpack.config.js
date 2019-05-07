@@ -4,6 +4,8 @@ const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const MiniCssplugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const cssnano = require('cssnano');
 
 module.exports = {
   entry: './public/index.js',
@@ -132,6 +134,18 @@ module.exports = {
     // new ExtractTextPlugin('./css/[name].css')
     new MiniCssplugin({
       filename: './css/index.css'
+    }),
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.css$/g,
+      cssProcessor: cssnano,
+      cssProcessorPluginOptions: {
+        preset: ['default',
+          {
+            discardComments: { removeAll: true }
+          }
+        ]
+      },
+      canPrint: true
     })
   ]
 };

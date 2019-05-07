@@ -5,7 +5,7 @@
   url('./iconfont/iconfont.ttf?t=1518407379870') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
   url('./iconfont/iconfont.svg?t=1518407379870#iconfont') format('svg'); /* iOS 4.1- */
 }
-
+/* web字体 */
 .iconfont {
   font-family:"iconfont" !important;
   font-size:16px;
