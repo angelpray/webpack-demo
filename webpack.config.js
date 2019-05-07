@@ -1,5 +1,6 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
+// const webpack = require('webpack');
 
 module.exports = {
   entry: './public/index.js',
@@ -79,5 +80,15 @@ module.exports = {
         }
       }]
     }]
-  }
+  },
+  // resolve: {
+  //   alias: {
+  //     jQuery: path.resolve(__dirname, 'public/js/jquery.js')
+  //   }
+  // },
+  // plugins: [
+  //   new webpack.ProvidePlugin({
+  //     jQuery: 'jQuery'
+  //   })
+  // ]
 };
