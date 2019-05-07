@@ -1,12 +1,27 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HappyPack = require('happypack');
+
+function resolve(dir) {
+  return path.join(__dirname, '..', dir);
+}
 
 module.exports = {
   entry: './public/index.js',
   output: {
     path: path.resolve(__dirname, '../build'),
     filename: 'bundle[hash].js'
+  },
+  resolve: {
+    extensions: ['.js'],
+    modules: [
+      resolve('public'),
+      resolve('node_modules')
+    ],
+    alias: {
+      assets: resolve('./public/assets')
+    }
   },
   module: {
     rules: [{
@@ -90,12 +105,8 @@ module.exports = {
     {
       test: /\.js$/,
       exclude: /node_modules/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env']
-        }
-      }
+      include: [resolve('public')],
+      loader: 'happypack/loader?id=happyBabel'
     }]
   },
   plugins: [
@@ -113,5 +124,9 @@ module.exports = {
       },
       hash: true
     }),
+    new HappyPack({
+      id: 'happyBabel',
+      loaders: ['babel-loader']
+    })
   ]
 };
