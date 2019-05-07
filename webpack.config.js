@@ -1,6 +1,6 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
-// const webpack = require('webpack');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const MiniCssplugin = require('mini-css-extract-plugin');
@@ -23,7 +23,9 @@ module.exports = {
     contentBase: './build', // 设置服务器访问时的基本目录
     host: 'localhost', // 服务器的ip访问地址
     port: 8080, // 端口
-    open: true // 自动打开页面
+    open: true, // 自动打开页面
+    hot: true,
+    hotOnly: true
   },
   module: {
     rules: [{
@@ -34,7 +36,8 @@ module.exports = {
       //   // CSS加载
       //   use: 'css-loader'
       // })
-      use: [MiniCssplugin.loader, {
+      // MiniCssplugin.loader不能和hot配合使用
+      use: ['style-loader', {
         loader: 'css-loader',
         options: {
           sourceMap: true
@@ -173,5 +176,7 @@ module.exports = {
         to: path.join(__dirname, '/build/assets'),
       }
     ]),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin()
   ]
 };

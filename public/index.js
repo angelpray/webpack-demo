@@ -3,5 +3,9 @@ import './index.less';
 import './iconfont.css';
 import './index.css';
 
-const str = '清除文件!';
+const str = 'HOT!~';
 console.log(str);
+
+if (module.hot) {
+  module.hot.accept();
+}
