@@ -7,12 +7,13 @@ const MiniCssplugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const cssnano = require('cssnano');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: './public/index.js',
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js'
+    filename: 'bundle[hash].js'
   },
   devServer: {
     contentBase: './build', // 设置服务器访问时的基本目录
@@ -118,6 +119,7 @@ module.exports = {
   //   })
   // ]
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: 'webpack.html',
@@ -154,6 +156,6 @@ module.exports = {
         from: path.join(__dirname, '/public/assets'),
         to: path.join(__dirname, '/build/assets'),
       }
-    ])
+    ]),
   ]
 };
