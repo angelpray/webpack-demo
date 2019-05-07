@@ -79,8 +79,21 @@ module.exports = {
           outputPath: './fonts'
         }
       }]
+    },
+    {
+      test: /\.js$/,
+      exclude: /node_modules/,
+      // use: 'babel-loader'
+      // 第二种方式进行es6编译
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env']
+        }
+      }
     }]
   },
+  // 第三方js库处理方式一
   // resolve: {
   //   alias: {
   //     jQuery: path.resolve(__dirname, 'public/js/jquery.js')
