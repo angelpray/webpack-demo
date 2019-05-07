@@ -33,8 +33,15 @@ module.exports = {
       use: [MiniCssplugin.loader, 'css-loader']
     },
     {
+      test: /\.html$/,
+      loader: 'html-loader',
+      options: {
+        attrs: ['img:src', 'img:data-src']
+      }
+    },
+    {
       test: /\.less$/,
-      use: [MiniCssplugin.loader, 'css-loader', 'less-loader', {
+      use: ['style-loader', 'css-loader', 'less-loader', {
         loader: 'postcss-loader',
         options: {
           plugins: [
@@ -54,7 +61,7 @@ module.exports = {
     },
     {
       test: /\.scss/,
-      use: [MiniCssplugin.loader, 'css-loader', 'sass-loader', {
+      use: ['style-loader', 'css-loader', 'sass-loader', {
         loader: 'postcss-loader',
         options: {
           plugins: [
@@ -77,10 +84,10 @@ module.exports = {
       use: [{
         loader: 'file-loader',
         options: {
-          name: 'avatar.jpg',
+          name: '[path]avatar.jpg',
           context: './',
           // 发布路径
-          publicPath: '../images',
+          // publicPath: '../images',
           outputPath: './images'
         }
       }]
