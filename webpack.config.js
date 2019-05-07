@@ -1,6 +1,7 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 // const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './public/index.js',
@@ -104,4 +105,20 @@ module.exports = {
   //     jQuery: 'jQuery'
   //   })
   // ]
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      filename: 'webpack.html',
+      minify: {
+        minimize: true,
+        removeAttributeQuotes: true,
+        removeComments: true,
+        collapseWhitespace: true,
+        minifyCSS: true,
+        minifyJS: true,
+        removeEmptyElements: true
+      },
+      hash: true
+    })
+  ]
 };
