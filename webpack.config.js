@@ -15,6 +15,10 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle[hash].js'
   },
+  // 开发环境下
+  devtool: 'cheap-module-eval-source-map',
+  // 生产环境下
+  // devtool: 'source-map'
   devServer: {
     contentBase: './build', // 设置服务器访问时的基本目录
     host: 'localhost', // 服务器的ip访问地址
@@ -30,7 +34,12 @@ module.exports = {
       //   // CSS加载
       //   use: 'css-loader'
       // })
-      use: [MiniCssplugin.loader, 'css-loader']
+      use: [MiniCssplugin.loader, {
+        loader: 'css-loader',
+        options: {
+          sourceMap: true
+        }
+      }]
     },
     {
       test: /\.html$/,
