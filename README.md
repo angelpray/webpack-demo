@@ -26,3 +26,5 @@
 ## 使用babel编译es6
 
 ## 使用插件生成HTML
+
+## 使用webpack提取分离CSS

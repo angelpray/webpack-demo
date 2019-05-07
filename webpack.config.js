@@ -2,6 +2,8 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 // const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssplugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: './public/index.js',
@@ -18,11 +20,17 @@ module.exports = {
   module: {
     rules: [{
       test: /\.css$/,
-      use: ['style-loader', 'css-loader']
+      // use: ExtractTextPlugin.extract({
+      //   // 提取css样式
+      //   fallback: 'style-loader',
+      //   // CSS加载
+      //   use: 'css-loader'
+      // })
+      use: [MiniCssplugin.loader, 'css-loader']
     },
     {
       test: /\.less$/,
-      use: ['style-loader', 'css-loader', 'less-loader', {
+      use: [MiniCssplugin.loader, 'css-loader', 'less-loader', {
         loader: 'postcss-loader',
         options: {
           plugins: [
@@ -42,7 +50,7 @@ module.exports = {
     },
     {
       test: /\.scss/,
-      use: ['style-loader', 'css-loader', 'sass-loader', {
+      use: [MiniCssplugin.loader, 'css-loader', 'sass-loader', {
         loader: 'postcss-loader',
         options: {
           plugins: [
@@ -65,9 +73,10 @@ module.exports = {
       use: [{
         loader: 'file-loader',
         options: {
-          name: '[path]avatar.jpg',
-          context: '../',
-          publicPath: 'http://www.test.com/img',
+          name: 'avatar.jpg',
+          context: './',
+          // 发布路径
+          publicPath: '../images',
           outputPath: './images'
         }
       }]
@@ -119,6 +128,10 @@ module.exports = {
         removeEmptyElements: true
       },
       hash: true
+    }),
+    // new ExtractTextPlugin('./css/[name].css')
+    new MiniCssplugin({
+      filename: './css/index.css'
     })
   ]
 };
