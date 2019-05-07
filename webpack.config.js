@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssplugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const cssnano = require('cssnano');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './public/index.js',
@@ -139,13 +140,20 @@ module.exports = {
       assetNameRegExp: /\.css$/g,
       cssProcessor: cssnano,
       cssProcessorPluginOptions: {
-        preset: ['default',
+        preset: [
+          'default',
           {
             discardComments: { removeAll: true }
           }
         ]
       },
       canPrint: true
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: path.join(__dirname, '/public/assets'),
+        to: path.join(__dirname, '/build/assets'),
+      }
+    ])
   ]
 };
