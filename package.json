@@ -2,11 +2,9 @@
   "name": "webpack-demo",
   "version": "1.0.0",
   "description": "学习w过程中写到的一些Demo",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "dev": "webpack --mode development --config ./config/webpack.dev.conf.js ",
-    "build": "webpack --mode production --config ./config/webpack.prod.conf.js",
-    "start": "webpack-dev-server --mode development --config ./config/webpack.dev.conf.js"
+    "bundle": "webpack"
   },
   "repository": {
     "type": "git",
