@@ -61,10 +61,37 @@ module.exports = {
 ```js
 module: {
   rules: [{
-    test: /\.jpg$/,
+    test: /\.(jpg|png|gif)$/,
     use: {
-      loader: 'file-loader'
+      loader: 'file-loader',
+      options: {
+        // 占位符[ext] [name] [hash]
+        name: '[name]_[hash].[ext]',
+        outputPath: 'images/'
+      }
     }
   }]
 },
+
+```
+- `url-loader`可以实现`file-loader`所有的功能，但会把图片转化为`base64`字符串。优点：减少一次HTTP请求，缺点：如果图片大，那么js文件就会大，加载js的时间就会变长，页面加载慢。
+
+- `url-loader`最佳实践：`limit`选项进行配置，当大于limit则单独成文件，否则转换成base64字符串。
+```js
+module: {
+  rules: [{
+    test: /\.(jpg|png|gif)$/,
+    use: {
+      loader: 'url-loader',
+      options: {
+        // 占位符[ext] [name] [hash]
+        name: '[name]_[hash].[ext]',
+        outputPath: 'images/',
+        // 以字节为单位，1024字节=1kb
+        limit: 10240
+      }
+    }
+  }]
+},
+
 ```

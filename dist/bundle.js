@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__.p + \"3f2e0ae72d93dc9055bd3bfdfb44714a.jpg\";\n\n//# sourceURL=webpack:///./src/avatar.jpg?");
+eval("module.exports = __webpack_require__.p + \"images/avatar_3f2e0ae72d93dc9055bd3bfdfb44714a.jpg\";\n\n//# sourceURL=webpack:///./src/avatar.jpg?");
 
 /***/ }),
 

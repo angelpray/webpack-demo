@@ -7,9 +7,15 @@ module.exports = {
   },
   module: {
     rules: [{
-      test: /\.jpg$/,
+      test: /\.(jpg|png|gif)$/,
       use: {
-        loader: 'file-loader'
+        loader: 'url-loader',
+        options: {
+          // 占位符[ext] [name] [hash]
+          name: '[name]_[hash].[ext]',
+          outputPath: 'images/',
+          limit: 20480
+        }
       }
     }]
   },
