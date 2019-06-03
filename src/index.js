@@ -1,2 +1,6 @@
-var num = 1
-console.log(num)
+import avatar from './avatar.jpg';
+
+let img = new Image();
+img.src = avatar;
+
+document.body.append(img);

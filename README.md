@@ -54,3 +54,17 @@ module.exports = {
 - Chunks：打包文件对应ID值
 - Chunk Names：打包文件对应名字
 - 如果没有配置`mode`选项则会出现警告，默认是`production`，打包的文件会被压缩。
+
+## Loader
+
+- 模块的打包方案，识别除js文件外的文件模块。
+```js
+module: {
+  rules: [{
+    test: /\.jpg$/,
+    use: {
+      loader: 'file-loader'
+    }
+  }]
+},
+```
