@@ -74,6 +74,9 @@ module: {
 },
 
 ```
+
+### 文件loader
+
 - `url-loader`可以实现`file-loader`所有的功能，但会把图片转化为`base64`字符串。优点：减少一次HTTP请求，缺点：如果图片大，那么js文件就会大，加载js的时间就会变长，页面加载慢。
 
 - `url-loader`最佳实践：`limit`选项进行配置，当大于limit则单独成文件，否则转换成base64字符串。
@@ -95,3 +98,15 @@ module: {
 },
 
 ```
+
+### CSS loader
+
+- `style-loader css-loader`，style-loader负载挂载，css-loader负责分析css文件的关系。
+
+### CSS预处理 loader
+
+- 如果需要使用css预处理语言，比如less，则需要它的loader`less-loader`，同时需要css loader。出现多个loader时，执行顺序是从下到上，从右到左。
+
+### 添加浏览器厂商前缀 loader
+
+- 使用`postcss-loader`

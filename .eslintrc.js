@@ -17,5 +17,6 @@ module.exports = {
       'no-unused-vars': 'off',
       'prefer-const': 'off',
       'comma-dangle': 'off',
+      'import/no-extraneous-dependencies': 'off'
     }
 };

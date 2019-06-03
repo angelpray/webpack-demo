@@ -12,11 +12,21 @@ module.exports = {
         loader: 'url-loader',
         options: {
           // 占位符[ext] [name] [hash]
-          name: '[name]_[hash].[ext]',
-          outputPath: 'images/',
-          limit: 20480
+          name: '[path][name][hash].[ext]',
+          // 发布目录，在html文件中的src属性中添加
+          // publicPath: 'https://abc.com/img',
+          // 配置自定义文件的上下文，默认为 webpack.config.js
+          // context: '../',
+          outputPath: 'images',
+          limit: 10240
         }
       }
+    }, {
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader']
+    }, {
+      test: /\.less$/,
+      use: ['style-loader', 'css-loader', 'less-loader', 'postcss-loader']
     }]
   },
   output: {
