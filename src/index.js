@@ -5,4 +5,5 @@ let img = new Image();
 img.src = avatar;
 img.classList.add(style.avatar);
 
-document.body.appednd(img);
+document.body.append(img);
+console.log('test')

@@ -16,6 +16,8 @@
   - [Plugins插件](#plugins%E6%8F%92%E4%BB%B6)
   - [entry和output的基本配置](#entry%E5%92%8Coutput%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE)
   - [SourceMap配置](#sourcemap%E9%85%8D%E7%BD%AE)
+  - [WebpackDevServer](#webpackdevserver)
+    - [提升开发效率](#%E6%8F%90%E5%8D%87%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -109,9 +111,12 @@ module: {
       loader: 'url-loader',
       options: {
         // 占位符[ext] [name] [hash]
-        name: '[name]_[hash].[ext]',
-        outputPath: 'images/',
-        // 以字节为单位，1024字节=1kb
+        name: '[path][name][hash].[ext]',
+        // 发布目录，在html文件中的src属性中添加，类似CDN
+        // publicPath: 'https://abc.com/img',
+        // 配置自定义文件的上下文，默认为 webpack.config.js
+        // context: '../',
+        outputPath: 'images',
         limit: 10240
       }
     }
@@ -123,6 +128,14 @@ module: {
 ### CSS loader
 
 - `style-loader css-loader`，style-loader负载挂载，css-loader负责分析css文件的关系。
+
+- 让less或者其他预处理文件加载less-loader和postcss-loader，防止跳过了这两个loader
+```js
+options: {
+  importLoaders: 2,
+  modules: true
+}
+```
 
 ### CSS预处理 loader
 
@@ -207,4 +220,26 @@ devtool: 'cheap-module-eval-source-map',
 // 生产环境推荐
 devtool: 'cheap-module-source-map',
 ```
+
+## WebpackDevServer
+
+### 提升开发效率
+
+- webpack监听文件：`webpack --watch`
+
+- webpackDevServer：webpack没有内置了devServer，需要下载
+```js
+// webpack.config.js
+devServer: {
+  contentBase: './dist',
+  // 浏览器自动打开地址
+  open: true
+},
+// package.json
+"scripts": {
+  "start": "webpack-dev-server"
+}
+```
+
+- 自己写一个服务器，因为webpackDevServer已经很成熟了，不推荐自己写
 

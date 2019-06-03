@@ -4,7 +4,9 @@
   "description": "学习w过程中写到的一些Demo",
   "private": true,
   "scripts": {
-    "bundle": "webpack"
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
