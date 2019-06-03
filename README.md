@@ -109,4 +109,41 @@ module: {
 
 ### 添加浏览器厂商前缀 loader
 
-- 使用`postcss-loader`
+- 使用`postcss-loader`,需要新建`postcss.config.js`,并在其添加插件`autoprefixer`
+```js
+// postcss.config.js
+const autoprefixer = require('autoprefixer')
+
+module.exports = {
+  plugins: [
+    autoprefixer
+  ]
+}
+// webpack.config.js
+{
+  test: /\.less$/,
+  use: ['style-loader',
+  'css-loader',
+  'less-loader',
+  'postcss-loader'
+  ]
+}
+```
+
+### CSS打包模块化
+
+- css-loader中有一个modules选项，使其为true，导入样式表为style，并将类修改为`style.class`，其中class为样式表中的类。
+
+```js
+import avatar from './avatar.jpg';
+import style from './layout.less';
+
+let img = new Image();
+img.src = avatar;
+img.classList.add(style.avatar);
+```
+
+### 打包字体文件
+
+- 下载好字体文件，声明好字体，在`webpack.config.js`中使用`file-loader`进行打包。
+

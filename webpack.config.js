@@ -26,7 +26,14 @@ module.exports = {
       use: ['style-loader', 'css-loader']
     }, {
       test: /\.less$/,
-      use: ['style-loader', 'css-loader', 'less-loader', 'postcss-loader']
+      use: ['style-loader', {
+        loader: 'css-loader',
+        options: {
+          // 让less文件加载less-loader和postcss-loader，防止跳过了这两个loader
+          importLoaders: 2,
+          modules: true
+        }
+      }, 'less-loader', 'postcss-loader']
     }]
   },
   output: {
