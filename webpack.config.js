@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
   mode: 'development',
+  devtool: 'cheap-module-eval-source-map',
   entry: {
     main: './src/index.js'
   },
@@ -43,6 +44,8 @@ module.exports = {
     template: 'src/index.html'
   }), new CleanWebpackPlugin()],
   output: {
+    // index.html中引入cdn地址
+    // publicPath: 'cdn.com.cn'
     filename: 'dist.js',
     path: path.resolve(__dirname, 'dist')
   }

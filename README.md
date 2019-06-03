@@ -155,5 +155,35 @@ img.classList.add(style.avatar);
 
 - `clean-webpack-plugin`,清空上一次打包好的文件夹。
 
+```js
+plugins: [new HtmlWebpackPlugin({
+  // 生成html的模板
+  template: 'src/index.html'
+}), new CleanWebpackPlugin()],
+```
 
+## entry和output的基本配置
+
+- 可以设置多个入口文件和打包文件
+
+## SourceMap配置
+
+- dist目录下main.js代码出错，sourceMap它是一个映射关系，他知道dist目录下文件出错的行数对应这src目录下的index.js文件的行数。它的作用就是让我们知道src源文件的出错行数。
+```js
+// source-map，生成一个map映射文件
+devtool: 'source-map',
+// inline，map映射文件打包到了main.js中
+devtool: 'inline-source-map',
+// cheap，只需要告诉第几行就好，不需要告诉更详细的的信息
+devtool: 'cheap-inline-source-map',
+// module，不单告诉打包的src文件错误，也告诉其他第三方库的错误
+devtool: 'cheap-module-inline-source-map',
+// eval，执行效率最快，但提示的内容可能不全
+devtool: 'eval',
+
+// 开发环境推荐
+devtool: 'cheap-module-eval-source-map',
+// 生产环境推荐
+devtool: 'cheap-module-source-map',
+```
 
