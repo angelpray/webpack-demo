@@ -12,7 +12,7 @@
 
 - 安装特定webpack版本：`npm i webpack-cli webpack@version -D`。
 
-- webpack-cli作用是在命令行中使用webpack
+- webpack-cli作用是在命令行中使用webpack。
 
 ## 初始化配置文件
 
@@ -146,4 +146,14 @@ img.classList.add(style.avatar);
 ### 打包字体文件
 
 - 下载好字体文件，声明好字体，在`webpack.config.js`中使用`file-loader`进行打包。
+
+## Plugins插件
+
+- plugin可以在webpack运行到某个时刻的时候，做一些事情
+
+- `html-webpack-plugin`，需要先引用。自动生成html文件，并把打包生成的js自动引入到html文件中。可以使用`template`选项做出一个HTML模板，插件会根据模板生成html
+
+- `clean-webpack-plugin`,清空上一次打包好的文件夹。
+
+
 
