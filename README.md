@@ -26,6 +26,8 @@
     - [不同环境的解决方案](#%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88)
   - [Code Splitting，代码拆分](#code-splitting%E4%BB%A3%E7%A0%81%E6%8B%86%E5%88%86)
     - [SplitChunksPlugin插件的其他选项](#splitchunksplugin%E6%8F%92%E4%BB%B6%E7%9A%84%E5%85%B6%E4%BB%96%E9%80%89%E9%A1%B9)
+  - [Lazy Loading 懒加载](#lazy-loading-%E6%87%92%E5%8A%A0%E8%BD%BD)
+  - [Chunk是什么](#chunk%E6%98%AF%E4%BB%80%E4%B9%88)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -404,15 +406,42 @@ optimization: {
         test: /[\\/]node_modules[\\/]/,
         // 值越大就放到改组
         priority: -10,
-        filename: 'vendors.js'
       },
       default: {
         priority: -20,
         // 检测模块是否已经被打包过了
-        reuseExistingChunk: true,
-        filename: 'common.js'
+        reuseExistingChunk: true
       }
     }
   }
 },
 ```
+
+## Lazy Loading 懒加载
+
+- 需要配合异步加载模块使用，同步加载模块无法实现
+
+- 实际上并不是webpack的内容，而是ES Module的一种模块懒加载方案
+
+- 需要用到`@babel/plugin-syntax-dynamic-import`模块
+```js
+async function getComponent() {
+  const { default: _ } = await import(/* webpackChunkName: "lodash" */'lodash');
+  const element = document.createElement('div');
+  element.innerHTML = _.join(['Lazy', 'Loading'], '--');
+  return element;
+}
+docuemnt.addEventListener('click', () => {
+  getComponent().then(element => {
+    document.body.appendChild(element)
+  })
+})
+```
+
+
+## Chunk是什么
+
+![](https://image-static.segmentfault.com/795/425/79542560-5cf6ee7a827d4_articlex)
+
+- 每一个文件就是一个chunk
+

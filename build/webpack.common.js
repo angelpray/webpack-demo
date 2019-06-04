@@ -47,17 +47,15 @@ module.exports = {
     splitChunks: {
       chunks: 'all',
       minSize: 30000,
-      minChunk: 1,
+      minChunks: 1,
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
-          priority: -10,
-          filename: 'vendors.js'
+          priority: -10
         },
         default: {
           priority: -20,
-          reuseExistingChunk: true,
-          filename: 'common.js'
+          reuseExistingChunk: true
         }
       }
     }
