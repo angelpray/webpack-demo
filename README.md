@@ -19,6 +19,7 @@
   - [WebpackDevServer](#webpackdevserver)
     - [提升开发效率](#%E6%8F%90%E5%8D%87%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87)
   - [Hot Module Replacement，热模块替换](#hot-module-replacement%E7%83%AD%E6%A8%A1%E5%9D%97%E6%9B%BF%E6%8D%A2)
+  - [Babel处理ES6语法](#babel%E5%A4%84%E7%90%86es6%E8%AF%AD%E6%B3%95)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -263,4 +264,31 @@ plugins: [
   new CleanWebpackPlugin(),
   new webpack.HotModuleReplacementPlugin()
 ],
+```
+
+## Babel处理ES6语法
+
+- 不仅进行语法转换，还要进行API进行转换
+
+- 为了不让webpack变得更复杂，可以新建`.babelrc`文件，写babel的配置选项。
+
+```js
+{
+  test: /\.js$/,
+  exclude: /node_modules/,
+  loader: 'babel-loader'
+}
+// babelrc
+{
+  "presets": [["@babel/preset-env", {
+    "useBuiltIns": "usage",
+    "corejs": 2,
+    "targets": {
+      "edge": "17",
+      "firefox": "60",
+      "chrome": "67",
+      "safari": "11.1"
+    },
+  }]]
+}
 ```
