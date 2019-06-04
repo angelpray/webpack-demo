@@ -18,6 +18,7 @@
   - [SourceMap配置](#sourcemap%E9%85%8D%E7%BD%AE)
   - [WebpackDevServer](#webpackdevserver)
     - [提升开发效率](#%E6%8F%90%E5%8D%87%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87)
+  - [Hot Module Replacement，热模块替换](#hot-module-replacement%E7%83%AD%E6%A8%A1%E5%9D%97%E6%9B%BF%E6%8D%A2)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -232,7 +233,7 @@ devtool: 'cheap-module-source-map',
 // webpack.config.js
 devServer: {
   contentBase: './dist',
-  // 浏览器自动打开地址
+  // 浏览器自动打开页面
   open: true
 },
 // package.json
@@ -243,3 +244,23 @@ devServer: {
 
 - 自己写一个服务器，因为webpackDevServer已经很成熟了，不推荐自己写
 
+## Hot Module Replacement，热模块替换
+
+- 不重新加载整个页面，只更新部分修改了的内容
+```js
+// webpack.config.js
+devServer: {
+  contentBase: './dist',
+  open: true,
+  hot: true,
+  // 当HMR失效的时候也不重新加载整个页面
+  hotOnly: true
+},
+plugins: [
+  new HtmlWebpackPlugin({
+    template: 'src/index.html'
+  }),
+  new CleanWebpackPlugin(),
+  new webpack.HotModuleReplacementPlugin()
+],
+```

@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
   mode: 'development',
@@ -10,7 +11,9 @@ module.exports = {
   },
   devServer: {
     contentBase: './dist',
-    open: true
+    open: true,
+    hot: true,
+    hotOnly: true
   },
   module: {
     rules: [{
@@ -25,7 +28,7 @@ module.exports = {
       }
     }, {
       test: /\.css$/,
-      use: ['style-loader', 'css-loader']
+      use: ['style-loader', 'css-loader', 'postcss-loader']
     }, {
       test: /\.less$/,
       use: ['style-loader', {
@@ -37,9 +40,13 @@ module.exports = {
       }, 'less-loader', 'postcss-loader']
     }]
   },
-  plugins: [new HtmlWebpackPlugin({
-    template: 'src/index.html'
-  }), new CleanWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html'
+    }),
+    new CleanWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
   output: {
     filename: 'dist.js',
     path: path.resolve(__dirname, 'dist')
