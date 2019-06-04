@@ -18,6 +18,7 @@ module.exports = {
       'prefer-const': 'off',
       'comma-dangle': 'off',
       'import/no-extraneous-dependencies': 'off',
-      'quotes': 'off'
+      'quotes': 'off',
+      'linebreak-style': 'off'
     }
 };

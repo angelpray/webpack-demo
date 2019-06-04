@@ -6,4 +6,4 @@ img.src = avatar;
 img.classList.add(style.avatar);
 
 document.body.append(img);
-console.log('test')
+console.log('test发')

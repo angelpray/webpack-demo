@@ -21,6 +21,9 @@
   - [Hot Module Replacement，热模块替换](#hot-module-replacement%E7%83%AD%E6%A8%A1%E5%9D%97%E6%9B%BF%E6%8D%A2)
   - [Babel处理ES6语法](#babel%E5%A4%84%E7%90%86es6%E8%AF%AD%E6%B3%95)
 - [Tree Shaking](#tree-shaking)
+  - [Development 和Production模式](#development-%E5%92%8Cproduction%E6%A8%A1%E5%BC%8F)
+    - [差异](#%E5%B7%AE%E5%BC%82)
+    - [不同环境的解决方案](#%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -304,7 +307,7 @@ plugins: [
 
 - 在生产模式下，不需要设置tree shaking，webpack已经为我们做好了。但package.json中还是需要写入`sideEffects`
 ```js
-// webpack.config.js
+// webpack.config.js，如果是生产环境下，则不需要用到
 optimization: {
   usedExports: true
 },
@@ -312,4 +315,58 @@ optimization: {
 "sideEffects": [
   "*.css"
 ],
+```
+
+## Development 和Production模式
+
+### 差异
+
+1. SourceMap更小
+2. 压缩代码
+
+### 不同环境的解决方案
+
+- 写入不同的config，新建build目录，作为webpack构建的配置文件夹，需要对package.json进行修改config文件的目录。
+
+```js
+// webpack.dev.js
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const commonConfig = require('./webpack.common.js')
+
+const devConfig = {
+  mode: 'development',
+  devtool: 'cheap-module-eval-source-map',
+  devServer: {
+    contentBase: './dist',
+    open: true,
+    hot: true,
+    // hotOnly: true
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  optimization: {
+    usedExports: true
+  }
+}
+
+module.exports = merge(commonConfig, devConfig)
+
+// webpack.prod.js
+const merge = require('webpack-merge')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const commonConfig = require('./webpack.common.js')
+
+const prodConfig = {
+  mode: 'production',
+  devtool: 'cheap-module-source-map',
+  plugins: [
+    new CleanWebpackPlugin(),
+  ],
+}
+module.exports = merge(commonConfig, prodConfig)
+
+// webpack.common.js，存放开发模式和生产模式的共同配置
+
 ```
