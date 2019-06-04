@@ -20,6 +20,7 @@
     - [提升开发效率](#%E6%8F%90%E5%8D%87%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87)
   - [Hot Module Replacement，热模块替换](#hot-module-replacement%E7%83%AD%E6%A8%A1%E5%9D%97%E6%9B%BF%E6%8D%A2)
   - [Babel处理ES6语法](#babel%E5%A4%84%E7%90%86es6%E8%AF%AD%E6%B3%95)
+- [Tree Shaking](#tree-shaking)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -291,4 +292,24 @@ plugins: [
     },
   }]]
 }
+```
+
+# Tree Shaking
+
+- 减少不需要的代码，只加载那些真正用到的代码.
+
+- `tree shaking`只支持ES Module（静态引入）
+
+- 在package.json文件中写入选项`sideEffects`，让那些不需要用到tree shaking功能的模块能正常加载
+
+- 在生产模式下，不需要设置tree shaking，webpack已经为我们做好了。但package.json中还是需要写入`sideEffects`
+```js
+// webpack.config.js
+optimization: {
+  usedExports: true
+},
+// package.json
+"sideEffects": [
+  "*.css"
+],
 ```
