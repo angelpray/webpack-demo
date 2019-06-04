@@ -24,6 +24,7 @@
   - [Development 和Production模式](#development-%E5%92%8Cproduction%E6%A8%A1%E5%BC%8F)
     - [差异](#%E5%B7%AE%E5%BC%82)
     - [不同环境的解决方案](#%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88)
+  - [Code Splitting，代码拆分](#code-splitting%E4%BB%A3%E7%A0%81%E6%8B%86%E5%88%86)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -369,4 +370,20 @@ module.exports = merge(commonConfig, prodConfig)
 
 // webpack.common.js，存放开发模式和生产模式的共同配置
 
+```
+
+## Code Splitting，代码拆分
+
+- 对公共代码进行代码拆分，如果不使用代码拆分，当页面逻辑发生变化时，又要重新加载公共代码。当使用了代码拆分，只要加载变化的代码文件即可。
+```js
+// index.js
+import _ from 'lodash';
+// 业务逻辑
+
+// config
+optimization: {
+  splitChunks: {
+    chunks: 'all'
+  }
+},
 ```

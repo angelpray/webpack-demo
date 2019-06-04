@@ -5,6 +5,7 @@
   "description": "学习w过程中写到的一些Demo",
   "private": true,
   "scripts": {
+    "devBuild": "webpack --config ./build/webpack.dev.js",
     "dev": "webpack-dev-server --config ./build/webpack.dev.js",
     "build": "webpack --config ./build/webpack.prod.js"
   },
@@ -58,6 +59,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
-    "core-js": "^2.6.9"
+    "core-js": "^2.6.9",
+    "lodash": "^4.17.11"
   }
 }

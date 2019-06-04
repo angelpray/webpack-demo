@@ -1,9 +1,10 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
   entry: {
-    main: './src/index.js'
+    main: './src/index.js',
   },
   module: {
     rules: [
@@ -39,10 +40,16 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html'
-    })
+    }),
+    new CleanWebpackPlugin(),
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, '../dist')
   }
 }

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import avatar from './avatar.jpg';
 import style from './layout.less';
 
@@ -6,4 +7,4 @@ img.src = avatar;
 img.classList.add(style.avatar);
 
 document.body.append(img);
-console.log('test发')
+console.log(_.join(['a', 'b', 'c'], '--'))
