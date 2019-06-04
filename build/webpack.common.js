@@ -45,7 +45,21 @@ module.exports = {
   ],
   optimization: {
     splitChunks: {
-      chunks: 'all'
+      chunks: 'all',
+      minSize: 30000,
+      minChunk: 1,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          filename: 'vendors.js'
+        },
+        default: {
+          priority: -20,
+          reuseExistingChunk: true,
+          filename: 'common.js'
+        }
+      }
     }
   },
   output: {

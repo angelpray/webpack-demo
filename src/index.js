@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import $ from 'jquery';
 import avatar from './avatar.jpg';
 import style from './layout.less';
 

@@ -25,6 +25,7 @@
     - [差异](#%E5%B7%AE%E5%BC%82)
     - [不同环境的解决方案](#%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88)
   - [Code Splitting，代码拆分](#code-splitting%E4%BB%A3%E7%A0%81%E6%8B%86%E5%88%86)
+    - [SplitChunksPlugin插件的其他选项](#splitchunksplugin%E6%8F%92%E4%BB%B6%E7%9A%84%E5%85%B6%E4%BB%96%E9%80%89%E9%A1%B9)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -384,6 +385,34 @@ import _ from 'lodash';
 optimization: {
   splitChunks: {
     chunks: 'all'
+  }
+},
+```
+
+### SplitChunksPlugin插件的其他选项
+
+```js
+optimization: {
+  splitChunks: {
+    chunks: 'all',
+    // 30kb
+    minSize: 30000,
+    minChunk: 1,
+    // 缓存组，同步代码的时候会生效,分割代码会放到一起
+    cacheGroups: {
+      vendors: {
+        test: /[\\/]node_modules[\\/]/,
+        // 值越大就放到改组
+        priority: -10,
+        filename: 'vendors.js'
+      },
+      default: {
+        priority: -20,
+        // 检测模块是否已经被打包过了
+        reuseExistingChunk: true,
+        filename: 'common.js'
+      }
+    }
   }
 },
 ```
