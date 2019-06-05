@@ -28,6 +28,8 @@
     - [SplitChunksPlugin插件的其他选项](#splitchunksplugin%E6%8F%92%E4%BB%B6%E7%9A%84%E5%85%B6%E4%BB%96%E9%80%89%E9%A1%B9)
   - [Lazy Loading 懒加载](#lazy-loading-%E6%87%92%E5%8A%A0%E8%BD%BD)
   - [Chunk是什么](#chunk%E6%98%AF%E4%BB%80%E4%B9%88)
+  - [Prefetch和preload 模块](#prefetch%E5%92%8Cpreload-%E6%A8%A1%E5%9D%97)
+  - [CSS文件代码分割](#css%E6%96%87%E4%BB%B6%E4%BB%A3%E7%A0%81%E5%88%86%E5%89%B2)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -178,6 +180,7 @@ module.exports = {
 
 - css-loader中有一个modules选项，使其为true，导入样式表为style，并将类修改为`style.class`，其中class为样式表中的类。
 
+- 使用模块化CSS会影响CSS中的类名
 ```js
 import avatar from './avatar.jpg';
 import style from './layout.less';
@@ -416,6 +419,7 @@ optimization: {
   }
 },
 ```
+- 事实上，同步加载的代码优化作用并不大，只有使用懒加载才能做到真正的性能优化。
 
 ## Lazy Loading 懒加载
 
@@ -444,4 +448,50 @@ docuemnt.addEventListener('click', () => {
 ![](https://image-static.segmentfault.com/795/425/79542560-5cf6ee7a827d4_articlex)
 
 - 每一个文件就是一个chunk
+
+## Prefetch和preload 模块
+
+- prefetch，页面加载完毕后，再去加载那些交互性的代码(也就是那些对页面加载没影响的代码)。
+
+- 配合懒加载（异步加载），可以提高代码使用率。
+
+- 前端性能，多考虑代码使用率
+```js
+/* webpackPrefetch: true */
+```
+
+## CSS文件代码分割
+
+- 主要用于生产环境下进行CSS代码分离，需要下载插件`mini-css-extract-plugin`
+- 压缩CSS：`optimize-css-assets-webpack-plugin`
+-
+```js
+plugins: [
+  new MiniCssExtractPlugin({
+    filename: "[name].css",
+    chunkFilename: "[id].css"
+  })
+],
+// 将style-loader换成MiniCssExtractPlugin.loader
+rules: [{
+  test: /\.css$/,
+  use: [
+    MiniCssExtractPlugin.loader,
+    'css-loader',
+    'postcss-loader']
+}, {
+  test: /\.less$/,
+  use: [MiniCssExtractPlugin.loader,
+    {
+      loader: 'css-loader',
+      options: {
+        importLoaders: 2,
+        modules: true
+      }
+    },
+    'less-loader',
+    'postcss-loader'
+  ]
+}]
+```
 
