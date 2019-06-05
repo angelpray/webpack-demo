@@ -40,6 +40,10 @@ const prodConfig = {
       new OptimizeCSSAssetsPlugin({}),
       new TerserPlugin()
     ]
+  },
+  output: {
+    filename: '[name].[contenthash].js',
+    chunkFilename: '[name].[contenthash].js'
   }
 }
 module.exports = merge(commonConfig, prodConfig)

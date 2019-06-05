@@ -9,7 +9,7 @@ async function getComponent() {
     /* webpackPrefetch: true */
     'lodash');
   const element = document.createElement('div');
-  element.innerHTML = _.join(['Lazy', 'Loading!'], '-');
+  element.innerHTML = _.join(['Lazy', 'Loading'], '-');
   return element;
 }
 document.addEventListener('click', () => {

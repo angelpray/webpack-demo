@@ -31,6 +31,10 @@ const devConfig = {
       }
     ]
   },
+  output: {
+    filename: '[name].js',
+    chunkFilename: '[name].js'
+  }
 }
 
 module.exports = merge(commonConfig, devConfig)

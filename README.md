@@ -30,6 +30,7 @@
   - [Chunk是什么](#chunk%E6%98%AF%E4%BB%80%E4%B9%88)
   - [Prefetch和preload 模块](#prefetch%E5%92%8Cpreload-%E6%A8%A1%E5%9D%97)
   - [CSS文件代码分割](#css%E6%96%87%E4%BB%B6%E4%BB%A3%E7%A0%81%E5%88%86%E5%89%B2)
+  - [浏览器缓存](#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -292,6 +293,7 @@ plugins: [
 // babelrc
 {
   "presets": [["@babel/preset-env", {
+    // 并只包含所需的polyfills
     "useBuiltIns": "usage",
     "corejs": 2,
     "targets": {
@@ -495,3 +497,18 @@ rules: [{
 }]
 ```
 
+## 浏览器缓存
+
+- `performance: false`，设置性能问题不需要警告。
+
+- 用户通过普通刷新（F5，不是强制刷新）页面，但文件名还是不变，那么请求文件就不会使用新的文件，只会使用缓存文件。
+
+- `[contenthash]`根据内容而生成的hash值，如果content不变，则hash不变。
+
+```js
+// prod config
+output: {
+  filename: '[name].[contenthash].js',
+  chunkFilename: '[name].[contenthash].js'
+}
+```
