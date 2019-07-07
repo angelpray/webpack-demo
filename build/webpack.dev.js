@@ -8,7 +8,7 @@ const devConfig = {
   devServer: {
     contentBase: './dist',
     open: true,
-    hot: true,
+    // hot: true,
     // hotOnly: true
   },
   plugins: [

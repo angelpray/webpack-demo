@@ -6,31 +6,38 @@
   - [安装](#%E5%AE%89%E8%A3%85)
   - [初始化配置文件](#%E5%88%9D%E5%A7%8B%E5%8C%96%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)
   - [webpack输出内容解析](#webpack%E8%BE%93%E5%87%BA%E5%86%85%E5%AE%B9%E8%A7%A3%E6%9E%90)
-  - [Loader](#loader)
+  - [Loader](#Loader)
     - [文件loader](#%E6%96%87%E4%BB%B6loader)
-    - [CSS loader](#css-loader)
-    - [CSS预处理 loader](#css%E9%A2%84%E5%A4%84%E7%90%86-loader)
+    - [CSS loader](#CSS-loader)
+    - [CSS预处理 loader](#CSS%E9%A2%84%E5%A4%84%E7%90%86-loader)
     - [添加浏览器厂商前缀 loader](#%E6%B7%BB%E5%8A%A0%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%82%E5%95%86%E5%89%8D%E7%BC%80-loader)
-    - [CSS打包模块化](#css%E6%89%93%E5%8C%85%E6%A8%A1%E5%9D%97%E5%8C%96)
+    - [CSS打包模块化](#CSS%E6%89%93%E5%8C%85%E6%A8%A1%E5%9D%97%E5%8C%96)
     - [打包字体文件](#%E6%89%93%E5%8C%85%E5%AD%97%E4%BD%93%E6%96%87%E4%BB%B6)
-  - [Plugins插件](#plugins%E6%8F%92%E4%BB%B6)
+  - [Plugins插件](#Plugins%E6%8F%92%E4%BB%B6)
   - [entry和output的基本配置](#entry%E5%92%8Coutput%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE)
-  - [SourceMap配置](#sourcemap%E9%85%8D%E7%BD%AE)
-  - [WebpackDevServer](#webpackdevserver)
+  - [SourceMap配置](#SourceMap%E9%85%8D%E7%BD%AE)
+  - [WebpackDevServer](#WebpackDevServer)
     - [提升开发效率](#%E6%8F%90%E5%8D%87%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87)
-  - [Hot Module Replacement，热模块替换](#hot-module-replacement%E7%83%AD%E6%A8%A1%E5%9D%97%E6%9B%BF%E6%8D%A2)
-  - [Babel处理ES6语法](#babel%E5%A4%84%E7%90%86es6%E8%AF%AD%E6%B3%95)
-- [Tree Shaking](#tree-shaking)
-  - [Development 和Production模式](#development-%E5%92%8Cproduction%E6%A8%A1%E5%BC%8F)
+  - [Hot Module Replacement，热模块替换](#Hot-Module-Replacement%E7%83%AD%E6%A8%A1%E5%9D%97%E6%9B%BF%E6%8D%A2)
+  - [Babel处理ES6语法](#Babel%E5%A4%84%E7%90%86ES6%E8%AF%AD%E6%B3%95)
+- [Tree Shaking](#Tree-Shaking)
+  - [Development和Production模式](#Development%E5%92%8CProduction%E6%A8%A1%E5%BC%8F)
     - [差异](#%E5%B7%AE%E5%BC%82)
     - [不同环境的解决方案](#%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88)
-  - [Code Splitting，代码拆分](#code-splitting%E4%BB%A3%E7%A0%81%E6%8B%86%E5%88%86)
-    - [SplitChunksPlugin插件的其他选项](#splitchunksplugin%E6%8F%92%E4%BB%B6%E7%9A%84%E5%85%B6%E4%BB%96%E9%80%89%E9%A1%B9)
-  - [Lazy Loading 懒加载](#lazy-loading-%E6%87%92%E5%8A%A0%E8%BD%BD)
-  - [Chunk是什么](#chunk%E6%98%AF%E4%BB%80%E4%B9%88)
-  - [Prefetch和preload 模块](#prefetch%E5%92%8Cpreload-%E6%A8%A1%E5%9D%97)
-  - [CSS文件代码分割](#css%E6%96%87%E4%BB%B6%E4%BB%A3%E7%A0%81%E5%88%86%E5%89%B2)
+  - [Code Splitting，代码拆分](#Code-Splitting%E4%BB%A3%E7%A0%81%E6%8B%86%E5%88%86)
+    - [SplitChunksPlugin插件的其他选项](#SplitChunksPlugin%E6%8F%92%E4%BB%B6%E7%9A%84%E5%85%B6%E4%BB%96%E9%80%89%E9%A1%B9)
+  - [Lazy Loading 懒加载](#Lazy-Loading-%E6%87%92%E5%8A%A0%E8%BD%BD)
+  - [Chunk是什么](#Chunk%E6%98%AF%E4%BB%80%E4%B9%88)
+  - [Prefetch和preload 模块](#Prefetch%E5%92%8Cpreload-%E6%A8%A1%E5%9D%97)
+  - [CSS文件代码分割](#CSS%E6%96%87%E4%BB%B6%E4%BB%A3%E7%A0%81%E5%88%86%E5%89%B2)
   - [浏览器缓存](#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98)
+  - [Shimming](#Shimming)
+  - [环境变量的使用](#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8)
+  - [Library的打包](#Library%E7%9A%84%E6%89%93%E5%8C%85)
+  - [PWA的打包](#PWA%E7%9A%84%E6%89%93%E5%8C%85)
+  - [提升webapck打包速度](#%E6%8F%90%E5%8D%87webapck%E6%89%93%E5%8C%85%E9%80%9F%E5%BA%A6)
+  - [多页面打包配置](#%E5%A4%9A%E9%A1%B5%E9%9D%A2%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE)
+  - [HTML直接引入img的src](#HTML%E7%9B%B4%E6%8E%A5%E5%BC%95%E5%85%A5img%E7%9A%84src)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -326,7 +333,7 @@ optimization: {
 ],
 ```
 
-## Development 和Production模式
+## Development和Production模式
 
 ### 差异
 
@@ -510,5 +517,63 @@ rules: [{
 output: {
   filename: '[name].[contenthash].js',
   chunkFilename: '[name].[contenthash].js'
+}
+```
+
+## Shimming
+
+- 解决webpack打包过程的一些兼容性问题，类似babel-polyfill的作用。
+
+- 需要使用到webpack.ProvidePlugin，自带的插件
+
+## 环境变量的使用
+
+- 只是一种打包方式。
+```js
+// common config
+module.exports = (env) => {
+  if (env && env.production) {
+    return merge(commonConfig, prodConfig);
+  } else {
+    return merge(commonConfig, devConfig);
+  }
+}
+// package.json
+"build": "webapck --env.production --config ./build/webpack.common.js"
+```
+
+## Library的打包
+
+- 应用场景：**开发函数库，或者组件库**的时候使用。
+
+## PWA的打包
+
+- PWA，单页面应用：**整个应用只有一个HTML文件**
+
+## 提升webapck打包速度
+
+1. 升级相关技术版本
+
+## 多页面打包配置
+
+- 原理：循环多个HtmlWebpackPlugin插件
+```js
+new HtmlWebpackPlugin({
+  template: 'src/index.html'
+  filename: '[name].html'
+})
+```
+
+## HTML直接引入img的src
+
+```js
+{
+  test: /\.(html)$/,
+  use: {
+    loader: 'html-loader',
+    options: {
+      attrs: [':data-src', 'img:src']
+    }
+  }
 }
 ```

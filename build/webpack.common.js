@@ -14,7 +14,6 @@ module.exports = {
           loader: 'url-loader',
           options: {
             name: '[path][name][hash].[ext]',
-            outputPath: 'images',
             limit: 10240
           }
         }
@@ -22,6 +21,14 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
+      }, {
+        test: /\.(html)$/,
+        use: {
+          loader: 'html-loader',
+          options: {
+            attrs: [':data-src', 'img:src']
+          }
+        }
       }
     ]
   },
@@ -32,6 +39,7 @@ module.exports = {
     new CleanWebpackPlugin(),
   ],
   optimization: {
+    usedExports: true,
     splitChunks: {
       chunks: 'all',
       minSize: 30000,
@@ -47,7 +55,6 @@ module.exports = {
         }
       }
     },
-    usedExports: true
   },
   output: {
     path: path.resolve(__dirname, '../dist')
